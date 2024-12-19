@@ -8,8 +8,7 @@ import winBGM from "./assets/win_bgm.mp3"
 export default function App() {
 
   function generateDice() {
-    return new Array(10).fill(0).map(()=>({value:5, isHeld:false,id:nanoid()}))
-    // return new Array(10).fill(0).map(()=>({value:Math.ceil(Math.random()*6), isHeld:false,id:nanoid()}))
+    return new Array(10).fill(0).map(()=>({value:Math.ceil(Math.random()*6), isHeld:false,id:nanoid()}))
   }
 
   function updateDice(){
