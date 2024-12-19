@@ -2,6 +2,7 @@ import Die from './components/Die'
 import Confetti from './components/Confetti'
 import React, { useEffect } from 'react'
 import { nanoid } from "nanoid"
+import winBGM from "./assets/win_bgm.mp3"
 
 
 export default function App() {
@@ -21,9 +22,17 @@ export default function App() {
 
   const [dice,setDice] = React.useState(()=>generateDice()) //ensuring this function run only one time 
   const buttonRef = React.useRef(null)
+  const bgmRef = React.useRef(new Audio(winBGM))
 
   const win = dice.every(die => die.value === dice[0].value && die.isHeld == true);
   React.useEffect(()=> win? buttonRef.current.focus():undefined,[win])
+  React.useEffect(()=> controlBGM(),[win])
+
+
+  const controlBGM = () => {
+    const audio = bgmRef.current
+    win? audio.play() : (audio.pause(),(audio.currentTime = 0))
+  };
 
 
   function hold(id) {
